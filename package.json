@@ -1,0 +1,29 @@
+{
+  "name": "pwaxmask",
+  "version": "1.2.1",
+  "description": "Feature-rich JavaScript library for numeric input masking and formatting. From -0 to Big.js, all your edge cases covered.",
+  "main": "src/pwaxMask.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "echo \"Build step not yet defined\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwaxdev/pwaxmask.git"
+  },
+  "keywords": [
+    "input-mask",
+    "number-formatting",
+    "numeric-input",
+    "javascript",
+    "big.js",
+    "form-validation",
+    "locale"
+  ],
+  "author": "PWAx.dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pwaxdev/pwaxmask/issues"
+  },
+  "homepage": "https://pwax.dev"
+}
