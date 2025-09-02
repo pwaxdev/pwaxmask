@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>pwaxMask – Demo</title>
+      <style>
+         :root {
+         --fg: #0f172a;
+         --muted: #6b7280;
+         --border: #e5e7eb;
+         --accent: #111827;
+         }
+         html, body { background:#fff; color:var(--fg); font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+         .container { max-width: 980px; margin: 32px auto; padding: 0 16px; }
+         h1 { font-size: 24px; margin: 0 0 8px; }
+         .tagline { color: var(--muted); margin-bottom: 24px; }
+         h2 { font-size: 18px; margin: 28px 0 12px; padding-top: 8px; border-top: 1px solid var(--border); }
+         .grid { display: grid; grid-template-columns: 240px 1fr; gap: 10px 16px; align-items: center; }
+         .grid + .grid { margin-top: 16px; }
+         label { font-weight: 600; }
+         input[type="text"], input[type="number"], .ce {
+         width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 8px; outline: none;
+         }
+         .ce[contenteditable="true"] { min-height: 40px; }
+         small.hint { color: var(--muted); display: block; margin-top: 4px; }
+         .section { margin-bottom: 28px; }
+         .row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+         .log { border: 1px dashed var(--border); border-radius: 8px; padding: 12px; min-height: 80px; background: #fafafa; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 12px; overflow:auto; }
+         code.k { background:#f3f4f6; padding:2px 6px; border-radius:6px; }
+         .muted { color: var(--muted); }
+      </style>
+   </head>
+   <body>
+      <div class="container">
+         <h1>pwaxMask</h1>
+         <p class="tagline"><strong>From <code>-0</code> to Big.js:</strong> all your numeric input edge cases covered.</p>
+         <p><u>This is just a small showcase of what pwaxMask can do!</u></p>
+         <div class="section">
+            <h2>1) Basic number</h2>
+            <div class="grid">
+               <label for="basic1">Basic</label>
+               <div>
+                  <input id="basic1" class="boot" type="text"/>
+                  <small class="hint"><i>no attributes</i></small>
+               </div>
+               <label for="basic2">Basic (2 decimals)</label>
+               <div>
+                  <input id="basic2" class="boot dec" type="text"/>
+                  <small class="hint">class: '.dec'</small>
+               </div>
+               <label for="basic3">Basic (4 decimals)</label>
+               <div>
+                  <input id="basic3" class="boot" type="text" data-digits="4"/>
+                  <small class="hint">data-digits="4"</small>
+               </div>
+               <label for="basic4">Accept both decimal</label>
+               <div>
+                  <input id="basic4" class="boot dec" type="text" data-accept-both-decimal="true"/>
+                  <small class="hint">data-accept-both-decimal="true"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>2) Currency</h2>
+            <div class="grid">
+               <label for="currency1">Euro</label>
+               <div>
+                  <input id="currency1" class="boot eur" type="text"/>
+                  <small class="hint">class: '.eur'</small>
+               </div>
+               <label for="currency2">Dollars</label>
+               <div>
+                  <input id="currency2" class="boot usd" type="text"/>
+                  <small class="hint">class: '.usd'</small>
+               </div>
+               <label for="currency3">Indian Style</label>
+               <div>
+                  <input id="currency3" class="boot inr" type="text"/>
+                  <small class="hint">class: '.inr'</small>
+               </div>
+               <label for="currency4">CHF</label>
+               <div>
+                  <input id="currency4" class="boot chf" type="text"/>
+                  <small class="hint">class: '.chf'</small>
+               </div>
+               <label for="currency5">CHF</label>
+               <div>
+                  <input id="currency5" class="boot chf" type="text"/>
+                  <small class="hint">class: '.chf'</small>
+               </div>
+               <label for="currency6">JPY</label>
+               <div>
+                  <input id="currency6" class="boot jpy" type="text"/>
+                  <small class="hint">class: '.jpy'</small>
+               </div>
+               <label for="currency7">GPB</label>
+               <div>
+                  <input id="currency7" class="boot gbp" type="text"/>
+                  <small class="hint">class: '.gbp'</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>3) Percent / Units</h2>
+            <div class="grid">
+               <label for="percent1">Basic</label>
+               <div>
+                  <input id="percent1" class="boot per" type="text" />
+                  <small class="hint">class: '.per'</small>
+               </div>
+               <label for="percent2">With decimals</label>
+               <div>
+                  <input id="percent2" class="boot per" type="text" data-digits="2"/>
+                  <small class="hint">class: '.per', data-digits="2"</small>
+               </div>
+               <label for="percent3">x1000</label>
+               <div>
+                  <input id="percent3" class="boot" type="text" data-suffix=" ‰" data-digits="3" data-max="1000"/>
+                  <small class="hint">data-suffix=" ‰" data-digits="3" data-max="1000"</small>
+               </div>
+               <label for="percent4">Basis points</label>
+               <div>
+                  <input id="percent4" class="boot" type="text" data-unit="bp"/>
+                  <small class="hint">data-unit="bp"</small>
+               </div>
+               <label for="percent5">Prefix</label>
+               <div>
+                  <input id="percent5" class="boot" type="text" data-prefix="A_LONG_PREFIX "/>
+                  <small class="hint">data-prefix="A_LONG_PREFIX "</small>
+               </div>
+               <label for="percent6">Combine Prefix & Suffix</label>
+               <div>
+                  <input id="percent6" class="boot" type="text" data-suffix=" is a Magic Number" data-prefix="Number "/>
+                  <small class="hint">data-suffix=" is a Magic Number" data-prefix="Number "</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>4) Grouping styles</h2>
+            <div class="grid">
+               <label for="style1">Standard</label>
+               <div>
+                  <input id="style1" class="boot" type="text" data-group-style="standard"/>
+                  <small class="hint">data-group-style="standard"</small>
+               </div>
+               <label for="style2">Indian</label>
+               <div>
+                  <input id="style2"  class="boot" type="text" data-group-style="indian"/>
+                  <small class="hint">data-group-style="indian"</small>
+               </div>
+               <label for="style3">Pattern [4,4]</label>
+               <div>
+                  <input id="style3" class="boot" type="text" data-prefix="¤ " data-decimal="," data-group="’" data-digits="2" data-group-pattern="4,4"/>
+                  <small class="hint">data-prefix="¤ " data-decimal="," data-group="’" data-digits="2" data-group-pattern="4,4"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>5) Signs & styles</h2>
+            <div class="grid">
+               <label for="sign1">Sign: show on zero</label>
+               <div>
+                  <input id="sign1" class="boot" type="text" placeholder="-0" data-allow-negative="true" data-show-zero-sign="true"/>
+                  <small class="hint">data-allow-negative="true" data-show-zero-sign="true"</small>
+               </div>
+               <label for="sign2">Minus behavior: toggle</label>
+               <div>
+                  <input id="sign2" class="boot" type="text" data-allow-negative="true" data-minus-behavior="toggle" placeholder="toggle sign with '-'" />
+                  <small class="hint">data-allow-negative="true" data-minus-behavior="toggle"</small>
+               </div>
+               <label for="sign3">Negative style: parentheses</label>
+               <div>
+                  <input id="sign3" class="boot" type="text" data-allow-negative="true" data-negative-style="parens"/>
+                  <small class="hint">data-allow-negative="true" data-negative-style="parens"</small>
+               </div>
+               <label for="sign4">Negative style: parentheses custom</label>
+               <div>
+                  <input id="sign4" class="boot" type="text" data-allow-negative="true" data-negative-style="parens" data-negative-parens="<,>"/>
+                  <small class="hint">data-allow-negative="true" data-negative-style="parens" data-negative-parens="<,>"</small>
+               </div>
+               <label for="sign5">Negative sign</label>
+               <div>
+                  <input id="sign5" class="boot" type="text" data-allow-negative="true"  data-negative-sign-symbol="⊖"/>
+                  <small class="hint">data-allow-negative="true"  data-negative-sign-symbol="⊖"</small>
+               </div>
+               <label for="sign6">Positive sign</label>
+               <div>
+                  <input id="sign6" class="boot" type="text" data-show-positive-sign="true"  data-positive-sign-symbol="⊕"/>
+                  <small class="hint">data-show-positive-sign="true"  data-positive-sign-symbol="⊖"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>6) Clamp, min/max & step</h2>
+            <div class="grid">
+               <label for="clamp1">Clamp always</label>
+               <div>
+                  <input id="clamp1" class="boot dec" type="text" data-min="0" data-max="100" data-step="0.25" data-clamp-mode="always" placeholder="min=0 max=100" />
+                  <small class="hint">data-min="0" data-max="100" data-step="0.25"</small>
+                  <small>User arrow up, down</small>
+               </div>
+               <label for="clamp2">Clamp on blur + snap to step</label>
+               <div>
+                  <input id="clamp2" class="boot" type="text" data-min="0" data-max="100" data-step="0.5" data-clamp-mode="blur" data-snap-to-step="true" placeholder="min=10 max=99" />
+                  <small class="hint">data-min="0" data-max="100" data-step="0.5" data-clamp-mode="blur" data-snap-to-step="true"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>7) Raw on focus / Select</h2>
+            <div class="grid">
+               <label for="focus1">Raw on focus</label>
+               <div>
+                  <input id="focus1" class="boot" type="text" data-digits="2" data-raw-on-focus="true" placeholder="Shows raw while focused" />
+                  <small class="hint">rawOnFocus: true (try focusing)</small>
+               </div>
+               <label for="focus2">Select decimals on Focus</label>
+               <div>
+                  <input id="focus2" class="eur boot" type="text" data-select-on-focus="true" data-select-decimals="true" value="€ 123,45">
+                  <small class="hint">data-select-on-focus="true" data-select-decimals="true"</small>
+               </div>
+               <label for="focus3">Wheel + Hold accel (⇧ = ×10)</label>
+               <div>
+                  <input id="focus3" class="eur boot" type="text" data-allow-wheel="true" data-hold-accel="true" data-step="0.25" data-min="0" data-max="9999" value="€ 123,45">
+                  <small class="hint">data-allow-wheel="true" data-hold-accel="true" data-step="0.25" data-min="0" data-max="9999"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>8) Empty handling</h2>
+            <div class="grid">
+               <label for="empty1">Keep empty</label>
+               <div>
+                  <input id="empty1" class="eur boot" type="text" data-keep-empty="true" placeholder="'' stays empty" />
+                  <small class="hint">data-keep-empty="true"</small>
+               </div>
+               <label for="empty2">Blank if zero</label>
+               <div>
+                  <input id="empty2" class="eur boot" type="text" data-blank-zero="true" />
+                  <small class="hint">data-blank-zero="true"</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>9) Digit normalization</h2>
+            <div class="grid">
+               <label for="digit1">Non‑Latin digits</label>
+               <div>
+                  <input id="digit1" class="boot num" type="text" value="۱۲۳۴۵۶۷۸۹۰" />
+                  <small class="hint">Arabic/Persian digits (۱۲۳۴۵۶۷۸۹۰) → ASCII</small>
+               </div>
+            </div>
+         </div>
+         <div class="section">
+            <h2>10) Big.js</h2>
+            <div class="grid">
+               <label for="big1">High precision</label>
+               <div>
+                  <input id="big1" class="boot" type="text" data-decimal="." data-group="," data-digits="18" data-prefix="Ξ " data-allow-wheel="true" data-step="0.000000000000000001" data-math-engine="big" inputmode="decimal" value="0.0000000000000000049"/>
+                  <small class="hint">data-decimal="." data-group="," data-digits="18" data-prefix="Ξ " data-allow-wheel="true" data-step="0.000000000000000001" data-math-engine="big" inputmode="decimal"</small>
+               </div>
+            </div>
+         </div>
+         <h3><br>“What you see here is just the tip of the iceberg: pwaxMask offers many more powerful features.”</h3>
+      </div>
+      <script src="src/pwaxMask.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/big.js@6.2.1/big.min.js"></script>
+      <script>
+         (function () {
+           if (!window.pwaxMask || typeof pwaxMask.init !== 'function') {
+             console.warn('pwaxMask.attach not found. Make sure pwaxMask.js is loaded.');
+             return;
+           }
+           // Init
+           pwaxMask.init({ selectors: '.boot', detectLocale: false });
+         })();
+      </script>
+   </body>
+</html>
